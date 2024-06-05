@@ -7,7 +7,7 @@ import {
   Avatar,
 } from '@nextui-org/react';
 import { useState } from 'react';
-import { Heart, HeartSolid, Comment } from '../icons';
+import { Heart, HeartSolid, Comment } from '../Icons';
 
 export default function App() {
   const [isLiked, setIsLiked] = useState(false);
