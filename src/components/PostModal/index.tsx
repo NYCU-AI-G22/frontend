@@ -13,7 +13,7 @@ import createPost from '@/actions/post';
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 
-import { toast } from 'sonner';
+import { Toaster, toast } from 'sonner';
 
 export default function PostModal({
   isOpen,
@@ -32,7 +32,7 @@ export default function PostModal({
     const { error } = await createPost(content, userId);
 
     if (error) {
-      console.error('Failed to create post:', error);
+      toast.error('貼文建立失敗!');
       return;
     }
     setContent('');
@@ -73,6 +73,7 @@ export default function PostModal({
               發布貼文
             </Button>
           </ModalFooter>
+          <Toaster richColors  />
         </>
       </ModalContent>
     </Modal>
