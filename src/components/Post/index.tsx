@@ -8,9 +8,10 @@ import {
   Avatar,
 } from '@nextui-org/react';
 import { useState } from 'react';
+import { PostType } from '@/types';
 import { Heart, HeartSolid, Comment } from '../Icons';
 
-export default function Post() {
+export default function Post({ post }: { post: PostType }) {
   const [isLiked, setIsLiked] = useState(false);
 
   return (
@@ -23,13 +24,13 @@ export default function Post() {
           />
           <div className="flex flex-col items-start justify-center gap-1">
             <h4 className="text-small font-bold leading-none text-slate-950">
-              Justin Li
+              {post.profiles.name}
             </h4>
           </div>
         </div>
       </CardHeader>
       <CardBody className="text-small text-black">
-        <p>Frontend developer and UI/UX enthusiast.</p>
+        <p>{post.content}</p>
       </CardBody>
       <CardFooter className="flex justify-end gap-3">
         <button

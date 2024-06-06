@@ -73,7 +73,7 @@ export default function PostModal({
               發布貼文
             </Button>
           </ModalFooter>
-          <Toaster richColors  />
+          <Toaster richColors />
         </>
       </ModalContent>
     </Modal>

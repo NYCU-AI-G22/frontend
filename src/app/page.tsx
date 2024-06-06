@@ -2,7 +2,8 @@ import Post from '@/components/Post';
 import PostButton from '@/components/Post/PostButton';
 import AvatarButton from '@/components/Avatar';
 import createClient from '@/utils/supabase/server';
-import { Profile } from '@/types';
+import { getPosts } from '@/actions/post';
+import { Profile, PostType } from '@/types';
 
 export default async function Home() {
   const supabase = createClient();
@@ -12,19 +13,22 @@ export default async function Home() {
     .single();
 
   const userProfile = profile as Profile;
-  console.log(userProfile.user_id);
+
+  const { data: posts } = await getPosts();
   return (
     <div className=" flex h-screen ">
       <div className="ml-auto mr-auto flex-row">
         <div className="mb-10 mt-10 flex justify-between">
-         <PostButton user_id={userProfile.user_id} />
+          <PostButton user_id={userProfile.user_id} />
           {userProfile ? (
             <AvatarButton name={userProfile.name} />
           ) : (
             <AvatarButton name="Max" />
           )}
         </div>
-        <Post />
+        <div className="space-y-6">
+          {posts?.map((post: PostType) => <Post key={post.id} post={post} />)}
+        </div>
       </div>
     </div>
   );
