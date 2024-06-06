@@ -11,7 +11,9 @@ import {
 } from '@nextui-org/react';
 import createPost from '@/actions/post';
 import { useState } from 'react';
-import { toast } from 'sonner'
+import { useFormStatus } from 'react-dom';
+
+import { toast } from 'sonner';
 
 export default function PostModal({
   isOpen,
@@ -25,6 +27,7 @@ export default function PostModal({
   userId: string;
 }) {
   const [content, setContent] = useState('');
+  const { pending } = useFormStatus();
   const handlePost = async () => {
     const { error } = await createPost(content, userId);
 
@@ -32,9 +35,9 @@ export default function PostModal({
       console.error('Failed to create post:', error);
       return;
     }
+    setContent('');
+    toast.success('貼文成功建立!');
 
-    toast.success('Event has been created')
-    
     onClose();
   };
   return (
@@ -61,7 +64,12 @@ export default function PostModal({
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="warning" onPress={handlePost}>
+            <Button
+              color="warning"
+              onPress={handlePost}
+              disabled={pending}
+              isLoading={pending}
+            >
               發布貼文
             </Button>
           </ModalFooter>

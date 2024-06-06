@@ -5,7 +5,7 @@ import { useDisclosure } from '@nextui-org/use-disclosure';
 import { PostButtonIcon } from '../Icons';
 import PostModal from '../PostModal';
 
-export default function PostButton(user_id: string) {
+export default function PostButton({ user_id }: { user_id: string }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   return (
     <div className="flex flex-wrap items-center gap-4">

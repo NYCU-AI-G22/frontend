@@ -12,12 +12,12 @@ export default async function Home() {
     .single();
 
   const userProfile = profile as Profile;
-  console.log(profile);
+  console.log(userProfile.user_id);
   return (
     <div className=" flex h-screen ">
       <div className="ml-auto mr-auto flex-row">
         <div className="mb-10 mt-10 flex justify-between">
-          <PostButton user_id={userProfile.user_id} />
+         <PostButton user_id={userProfile.user_id} />
           {userProfile ? (
             <AvatarButton name={userProfile.name} />
           ) : (
