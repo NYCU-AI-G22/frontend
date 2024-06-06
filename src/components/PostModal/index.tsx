@@ -7,18 +7,36 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Input,
+  Textarea,
 } from '@nextui-org/react';
+import createPost from '@/actions/post';
+import { useState } from 'react';
+import { toast } from 'sonner'
 
 export default function PostModal({
   isOpen,
   onOpenChange,
   onClose,
+  userId,
 }: {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
   onClose: () => void;
+  userId: string;
 }) {
+  const [content, setContent] = useState('');
+  const handlePost = async () => {
+    const { error } = await createPost(content, userId);
+
+    if (error) {
+      console.error('Failed to create post:', error);
+      return;
+    }
+
+    toast.success('Event has been created')
+    
+    onClose();
+  };
   return (
     <Modal
       backdrop="opaque"
@@ -34,19 +52,17 @@ export default function PostModal({
           <ModalHeader className="flex flex-col gap-1">發布貼文</ModalHeader>
           <ModalBody>
             <div className="flex flex-col gap-4">
-              <Input
-                type="text"
-                placeholder="標題"
-                className="w-full p-2 text-black  rounded-md"
+              <Textarea
+                placeholder="Enter your description"
+                className="w-full"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
               />
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="danger" variant="light" onPress={onClose}>
-              Close
-            </Button>
-            <Button color="primary" onPress={onClose}>
-              Action
+            <Button color="warning" onPress={handlePost}>
+              發布貼文
             </Button>
           </ModalFooter>
         </>
