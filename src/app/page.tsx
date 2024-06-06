@@ -1,14 +1,28 @@
 import Post from '@/components/Post';
 import PostButton from '@/components/Post/PostButton';
-export default function Home() {
+import AvatarButton from '@/components/Avatar';
+import createClient from '@/utils/supabase/server';
+
+export default async function Home() {
+  const supabase = createClient();
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('*')
+    .single();
+  console.log(profile);
   return (
-    <div className=" min-h-screen ">
-      <div className="flex items-center justify-items-center ">
-        <PostButton />
-      </div>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className=" flex h-screen ">
+      <div className="ml-auto mr-auto flex-row">
+        <div className="mb-10 mt-10 flex justify-between">
+          <PostButton />
+          {profile ? (
+            <AvatarButton name={profile.name} />
+          ) : (
+            <AvatarButton name="Max" />
+          )}
+        </div>
         <Post />
-      </main>
+      </div>
     </div>
   );
 }

@@ -10,14 +10,17 @@ import {
 import { useState } from 'react';
 import { Heart, HeartSolid, Comment } from '../Icons';
 
-export default function App() {
+export default function Post() {
   const [isLiked, setIsLiked] = useState(false);
 
   return (
-    <Card className="h-auto w-full max-w-[35rem] bg-white shadow-md sm:max-h-[24.7rem] sm:w-4/5 lg:w-2/3 xl:w-1/2">
+    <Card className="h-auto w-[30rem] bg-white px-5 pt-2 shadow-md">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
-          <Avatar showFallback src="https://images.unsplash.com/broken" />
+          <Avatar
+            showFallback
+            src="https://www.svgrepo.com/show/418965/user-avatar-profile.svg"
+          />
           <div className="flex flex-col items-start justify-center gap-1">
             <h4 className="text-small font-bold leading-none text-slate-950">
               Justin Li
@@ -25,19 +28,17 @@ export default function App() {
           </div>
         </div>
       </CardHeader>
-      <CardBody className="px-3 py-0   text-small text-default-400">
-        <p>
-          Frontend developer and UI/UX enthusiast. Join me on this coding
-          adventure!
-        </p>
+      <CardBody className="text-small text-black">
+        <p>Frontend developer and UI/UX enthusiast.</p>
       </CardBody>
-      <CardFooter className="gap-3">
-        <div
+      <CardFooter className="flex justify-end gap-3">
+        <button
+          type="button"
           className="flex cursor-pointer gap-1"
           onClick={() => setIsLiked(!isLiked)}
         >
           {isLiked ? <Heart /> : <HeartSolid />}
-        </div>
+        </button>
         <div>
           <Comment />
         </div>
