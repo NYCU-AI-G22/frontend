@@ -1,6 +1,6 @@
 import SubmitButton from '@/components/SubmitButton';
 import { Input } from '@nextui-org/react';
-import { login } from '@/actions/user';
+import login from '@/actions/user';
 
 export default async function LoginPage() {
   return (

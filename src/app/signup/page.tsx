@@ -44,7 +44,7 @@ export default async function LoginPage() {
             />
           </div>
           <div className="flex items-center justify-center">
-            <SubmitButton action="signin" />
+            <SubmitButton action="signup" />
           </div>
         </form>
       </div>

@@ -2,21 +2,19 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
-import { createClient } from '@/utils/supabase/server';
-import { cookies } from 'next/headers';
 
-export async function login(formData: FormData) {
+import createClient from '@/utils/supabase/server';
+
+export default async function login(formData: FormData) {
+  const supabase = createClient();
+
   const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
   };
 
-  const supabase = createServerActionClient({
-    cookies,
-  });
-
   const { error } = await supabase.auth.signInWithPassword(data);
+
   if (error) {
     redirect('/error');
   }
@@ -25,21 +23,26 @@ export async function login(formData: FormData) {
   redirect('/');
 }
 export async function signup(formData: FormData) {
-  const supabase = createClient();
+  const supabase = createClient()
+
 
   const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
-  };
+  }
 
-  const { error } = await supabase.auth.signUp(data);
+  const { error } = await supabase.auth.signUp(data)
 
   if (error) {
-    console.error('Signup error:', error);
-    redirect('/error');
-  } 
+    redirect('/error')
+  }
 
-    revalidatePath('/');
-    redirect('/account'); 
+  revalidatePath('/', 'layout')
+  redirect('/login')
+}
 
+export async function logout() {
+  const supabase = createClient();
+  await supabase.auth.signOut();
+  redirect('/login');
 }
