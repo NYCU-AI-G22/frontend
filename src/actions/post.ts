@@ -23,7 +23,8 @@ export default async function createPost(content: string, userId: string) {
 export async function getPosts() {
   const { data, error } = await supabase
     .from('posts')
-    .select(`
+    .select(
+      `
       id,
       user_id,
       content,
@@ -31,8 +32,33 @@ export async function getPosts() {
       profiles (
         name
       )
-    `)
+    `,
+    )
     .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error getting posts:', error);
+    return { error };
+  }
+  revalidatePath('/');
+  return { data };
+}
+
+export async function getPostsId(id: string) {
+  const { data, error } = await supabase
+    .from('posts')
+    .select(
+      `
+      id,
+      user_id,
+      content,
+      created_at,
+      profiles (
+        name
+      )
+    `,
+    )
+    .eq('id', id);
 
   if (error) {
     console.error('Error getting posts:', error);

@@ -16,7 +16,7 @@ export default async function Home() {
 
   const { data: posts } = await getPosts();
   return (
-    <div className=" flex h-screen ">
+    <div className=" flex  bg-gray-200">
       <div className="ml-auto mr-auto flex-row">
         <div className="mb-10 mt-10 flex justify-between">
           <PostButton user_id={userProfile.user_id} />
@@ -26,7 +26,7 @@ export default async function Home() {
             <AvatarButton name="Max" />
           )}
         </div>
-        <div className="space-y-6">
+        <div>
           {posts?.map((post: PostType) => <Post key={post.id} post={post} />)}
         </div>
       </div>

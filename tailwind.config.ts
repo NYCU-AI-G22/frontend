@@ -17,7 +17,7 @@ const config: Config = {
             background: '#FFFFFF', // or DEFAULT
             foreground: '#11181C', // or 50 to 900 DEFAULT
             primary: {
-              //... 50 to 900
+              // ... 50 to 900
               foreground: '#FFFFFF',
               DEFAULT: '#006FEE',
             },
@@ -29,7 +29,7 @@ const config: Config = {
             background: '#000000', // or DEFAULT
             foreground: '#ECEDEE', // or 50 to 900 DEFAULT
             primary: {
-              //... 50 to 900
+              // ... 50 to 900
               foreground: '#FFFFFF',
               DEFAULT: '#006FEE',
             },

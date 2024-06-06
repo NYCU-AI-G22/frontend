@@ -1,3 +1,5 @@
+/* eslint-disable import/prefer-default-export */
+
 'use client';
 
 import { NextUIProvider } from '@nextui-org/react';
