@@ -18,5 +18,5 @@ export type PostDetailType = {
   user_id: string;
   content: string;
   created_at: string;
-  profiles:{name: any }[];
+  profiles: { name: any }[];
 };

@@ -24,8 +24,16 @@ export default async function PostDetailPage({
     .eq('id', params.id)
     .single();
   return (
-    <div>
-      {data ? <Post post={data as PostDetailType} /> : <div>Post not found</div>}
+    <div className=" flex h-screen  bg-gray-200">
+      <div className="ml-auto mr-auto flex-row">
+        <div>
+          {data ? (
+            <Post post={data as PostDetailType} />
+          ) : (
+            <div>Post not found</div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
