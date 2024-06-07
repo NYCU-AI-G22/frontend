@@ -15,6 +15,7 @@ export default async function Home() {
   const userProfile = profile as Profile;
 
   const { data: posts } = await getPosts();
+
   return (
     <div className=" flex  bg-gray-200">
       <div className="ml-auto mr-auto flex-row">
@@ -27,7 +28,9 @@ export default async function Home() {
           )}
         </div>
         <div>
-          {posts?.map((post: PostType) => <Post key={post.id} post={post} />)}
+          {posts?.map((post: PostType) => (
+            <Post key={post.id} post={post} user_id={userProfile.user_id} />
+          ))}
         </div>
       </div>
     </div>

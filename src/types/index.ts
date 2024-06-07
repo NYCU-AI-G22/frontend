@@ -7,6 +7,7 @@ export type Profile = {
 };
 
 export type PostType = {
+  profiles: any;
   id: number;
   user_id: string;
   content: string;
