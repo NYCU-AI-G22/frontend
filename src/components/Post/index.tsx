@@ -67,7 +67,13 @@ export default function Post({
           </button>
         </CardFooter>
       </Link>
-      {isCommenting && <CommentBoard postId={post.id} userId={user_id} onCancel={() => setIsCommenting(false)} />}
+      {isCommenting && (
+        <CommentBoard
+          postId={post.id}
+          userId={user_id}
+          onCancel={() => setIsCommenting(false)}
+        />
+      )}
     </Card>
   );
 }

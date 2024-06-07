@@ -9,12 +9,16 @@ import { Toaster, toast } from 'sonner';
 import createComment from '@/actions/comment';
 
 type CommentBoardProps = {
-    postId: number;
-    userId: string;
-    onCancel: () => void;
-  };
+  postId: number;
+  userId: string;
+  onCancel: () => void;
+};
 
-export default function CommentBoard({ postId, userId, onCancel }: CommentBoardProps) {
+export default function CommentBoard({
+  postId,
+  userId,
+  onCancel,
+}: CommentBoardProps) {
   const { pending } = useFormStatus();
   const [comment, setComment] = useState('');
 
@@ -46,7 +50,7 @@ export default function CommentBoard({ postId, userId, onCancel }: CommentBoardP
       />
       <div className="mb-3 flex flex-row items-start justify-end gap-3 pr-3">
         <div>
-        <Button color="danger" variant="bordered" onClick={onCancel}>
+          <Button color="danger" variant="bordered" onClick={onCancel}>
             取消
           </Button>
         </div>
