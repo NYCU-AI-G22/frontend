@@ -80,8 +80,6 @@ export default function PostModal({
     handleAIComment(content, postId);
   };
 
-  
-
   return (
     <Modal
       backdrop="opaque"
