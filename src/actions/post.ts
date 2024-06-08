@@ -6,7 +6,6 @@ import { revalidatePath } from 'next/cache';
 const supabase = createClient();
 
 export default async function createPost(content: string, userId: string) {
-  console.log(userId);
   const { data, error } = await supabase
     .from('posts')
     .insert([{ content, user_id: userId }])

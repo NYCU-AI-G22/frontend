@@ -45,7 +45,10 @@ export default async function updateSession(request: NextRequest) {
   );
 
   // 刷新認證令牌
-  const { data: { user }, error } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
 
   if (error || !user) {
     return NextResponse.redirect(new URL('/login', request.url));

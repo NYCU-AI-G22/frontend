@@ -3,17 +3,18 @@ import PostButton from '@/components/Post/PostButton';
 import AvatarButton from '@/components/Avatar';
 import createClient from '@/utils/supabase/server';
 import { getPosts } from '@/actions/post';
-import {  PostType } from '@/types';
+import { PostType } from '@/types';
 
 export default async function Home() {
   const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   const { data: profile } = await supabase
     .from('profiles')
     .select('*')
     .eq('user_id', user?.id)
     .single();
-  console.log(profile,'6666')
   const { data: posts } = await getPosts();
 
   return (

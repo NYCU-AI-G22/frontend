@@ -1,4 +1,4 @@
-import { PostDetailType} from '@/types';
+import { PostDetailType } from '@/types';
 import { Card, CardBody, CardHeader } from '@nextui-org/react';
 import createClient from '@/utils/supabase/server';
 import Post from '@/components/Post';
@@ -10,7 +10,9 @@ export default async function PostDetailPage({
   params: { id: string };
 }) {
   const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser() || { data: { user: null } };
+  const {
+    data: { user },
+  } = (await supabase.auth.getUser()) || { data: { user: null } };
   const { data: comments, error } = await supabase
     .from('comments')
     .select(
@@ -42,7 +44,7 @@ export default async function PostDetailPage({
     )
     .eq('id', params.id)
     .single();
-    console.log('9999',data,'8888');
+  console.log('9999', data, '8888');
   return (
     <div className=" flex h-screen flex-col  bg-gray-200">
       <div className="ml-auto mr-auto flex-row">

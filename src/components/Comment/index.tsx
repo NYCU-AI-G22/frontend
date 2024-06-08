@@ -24,7 +24,6 @@ export default function CommentBoard({
 
   const handlePost = async () => {
     const { error } = await createComment(comment, userId, postId);
-    console.log(userId, '5');
     if (error) {
       console.error('Error creating comment:', error);
       return;
