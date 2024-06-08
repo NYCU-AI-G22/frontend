@@ -30,7 +30,6 @@ export default async function PostDetailPage({
     console.error('Error fetching comments:', error);
     return { error };
   }
-  console.log(comments);
   const { data } = await supabase
     .from('posts')
     .select(
@@ -44,7 +43,6 @@ export default async function PostDetailPage({
     )
     .eq('id', params.id)
     .single();
-  console.log('9999', data, '8888');
   return (
     <div className=" flex h-screen flex-col  bg-gray-200">
       <div className="ml-auto mr-auto flex-row">
