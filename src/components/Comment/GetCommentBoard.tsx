@@ -8,7 +8,7 @@ export default function GetCommentBoard({ comment }: CommentType) {
       <User
         name={comment.profiles.name}
         avatarProps={{
-          src: 'https://i.pravatar.cc/150?u=a04258114e29026702d',
+          src: 'https://www.svgrepo.com/show/418965/user-avatar-profile.svg',
         }}
       />
       <div className="mb-3 ml-[3rem]">{comment.content}</div>

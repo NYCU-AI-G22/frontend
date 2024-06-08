@@ -12,7 +12,7 @@ import {
 import createPost from '@/actions/post';
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
-
+import createComment from '@/actions/comment';
 import { Toaster, toast } from 'sonner';
 
 export default function PostModal({
@@ -28,18 +28,60 @@ export default function PostModal({
 }) {
   const [content, setContent] = useState('');
   const { pending } = useFormStatus();
+
+  const handleAIComment = async (aicontent: string, postId: number) => {
+    try {
+      console.log('Sending request to AI system...');
+      const aiResponse = await fetch('http://127.0.0.1:5000/text_generation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ input_text: aicontent }),
+      });
+
+      if (!aiResponse.ok) {
+        throw new Error(`AI response not ok, status: ${aiResponse.status}`);
+      }
+
+      const aiResult = await aiResponse.json();
+      const parsedResult = JSON.parse(aiResult.return);
+      const commentContent = parsedResult[0];
+
+      const commentResponse = await createComment(
+        commentContent,
+        '2ef3b064-2802-4b47-a6a1-ceb292c601de',
+        postId,
+      );
+
+      if (commentResponse.error) {
+        toast.error('AI 留言創建失敗!');
+      } else {
+        toast.success('AI 留言成功建立!');
+      }
+    } catch (err) {
+      console.error('Error fetching from AI system:', err);
+      toast.error('AI 留言創建失敗!');
+    }
+  };
   const handlePost = async () => {
-    const { error } = await createPost(content, userId);
+    const { data, error } = await createPost(content, userId);
 
     if (error) {
       toast.error('貼文建立失敗!');
       return;
     }
+
+    const postId = data[0].id;
+
     setContent('');
     toast.success('貼文成功建立!');
-
     onClose();
+    handleAIComment(content, postId);
   };
+
+  
+
   return (
     <Modal
       backdrop="opaque"
